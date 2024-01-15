@@ -1,0 +1,4 @@
+C:\Users\Maria\source\repos\Новая папка\kurs1401\kurs1401\x64\Debug\kurs1401.vcxproj.AssemblyReference.cache
+C:\Users\Maria\source\repos\Новая папка\kurs1401\kurs1401\x64\Debug\kurs1401.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\Maria\source\repos\Новая папка\kurs1401\kurs1401\x64\Debug\kurs1401.Presentation.resources
+C:\Users\Maria\source\repos\Новая папка\kurs1401\kurs1401\x64\Debug\kurs1401.vcxproj.GenerateResource.cache
