@@ -30,4 +30,21 @@ public:
 			writer->Close();
 		}
 	}
+
+	void Open(String^ fileName) {
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
+		openFileDialog->Filter = "XML Files (.xml)|.xml|All Files (.)|.";
+		openFileDialog->FilterIndex = 1;
+		openFileDialog->InitialDirectory = "C:\\";
+		openFileDialog->FileName = "example.xml";
+		
+		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			// Получить выбранный путь к файлу и обработать его
+			System::String^ filePath = openFileDialog->FileName;
+			XmlSerializer^ serializer = gcnew XmlSerializer(SlideList::typeid);
+			TextReader^ reader = gcnew StreamReader(filePath);
+			SlideList^ presentation = (SlideList^)serializer->Deserialize(reader);
+			reader->Close();
+		}
+	}
 };

@@ -127,6 +127,9 @@
     <ClInclude Include="Presentation.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Slide.h" />
+    <ClInclude Include="SlideList.h" />
+    <ClInclude Include="SlideType.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Presentation.resx">

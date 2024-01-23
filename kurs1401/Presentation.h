@@ -1,3 +1,5 @@
+#include "Slide.h";
+#include "SlideType.h";
 #pragma once
 
 namespace kurs1401 {
@@ -5,6 +7,7 @@ namespace kurs1401 {
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
@@ -14,13 +17,11 @@ namespace kurs1401 {
 	/// </summary>
 	public ref class Presentation : public System::Windows::Forms::Form
 	{
+	private: System::Windows::Forms::Button^ button1;
 	public:
 		Presentation(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: добавьте код конструктора
-			//
 		}
 
 	protected:
@@ -115,6 +116,7 @@ namespace kurs1401 {
 		/// Обязательная переменная конструктора.
 		/// </summary>
 		System::ComponentModel::Container ^components;
+		
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -159,6 +161,7 @@ namespace kurs1401 {
 			this->textBoxContent = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxTitle = (gcnew System::Windows::Forms::TextBox());
 			this->pictureBoxBackground = (gcnew System::Windows::Forms::PictureBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDownText))->BeginInit();
@@ -278,6 +281,7 @@ namespace kurs1401 {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->listBoxSlides);
 			this->groupBox1->Controls->Add(this->buttonMark);
 			this->groupBox1->Controls->Add(this->buttonTextColor);
@@ -444,6 +448,7 @@ namespace kurs1401 {
 			// 
 			// panelSlide
 			// 
+			this->panelSlide->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->panelSlide->Controls->Add(this->textBoxContent);
 			this->panelSlide->Controls->Add(this->textBoxTitle);
 			this->panelSlide->Controls->Add(this->pictureBoxBackground);
@@ -459,10 +464,10 @@ namespace kurs1401 {
 			this->textBoxContent->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBoxContent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->textBoxContent->Location = System::Drawing::Point(98, 204);
+			this->textBoxContent->Location = System::Drawing::Point(98, 134);
 			this->textBoxContent->Multiline = true;
 			this->textBoxContent->Name = L"textBoxContent";
-			this->textBoxContent->Size = System::Drawing::Size(748, 187);
+			this->textBoxContent->Size = System::Drawing::Size(748, 259);
 			this->textBoxContent->TabIndex = 2;
 			this->textBoxContent->Click += gcnew System::EventHandler(this, &Presentation::textBoxContent_Click);
 			this->textBoxContent->Enter += gcnew System::EventHandler(this, &Presentation::textBoxContent_Enter);
@@ -473,11 +478,10 @@ namespace kurs1401 {
 			// textBoxTitle
 			// 
 			this->textBoxTitle->AllowDrop = true;
-			this->textBoxTitle->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::SuggestAppend;
 			this->textBoxTitle->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBoxTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->textBoxTitle->Location = System::Drawing::Point(98, 84);
+			this->textBoxTitle->Location = System::Drawing::Point(98, 30);
 			this->textBoxTitle->Multiline = true;
 			this->textBoxTitle->Name = L"textBoxTitle";
 			this->textBoxTitle->Size = System::Drawing::Size(748, 74);
@@ -491,22 +495,33 @@ namespace kurs1401 {
 			// 
 			// pictureBoxBackground
 			// 
-			this->pictureBoxBackground->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->pictureBoxBackground->Location = System::Drawing::Point(0, 0);
+			this->pictureBoxBackground->Location = System::Drawing::Point(112, 123);
 			this->pictureBoxBackground->Name = L"pictureBoxBackground";
-			this->pictureBoxBackground->Size = System::Drawing::Size(940, 460);
+			this->pictureBoxBackground->Size = System::Drawing::Size(718, 313);
 			this->pictureBoxBackground->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBoxBackground->TabIndex = 0;
 			this->pictureBoxBackground->TabStop = false;
+			this->pictureBoxBackground->Visible = false;
 			this->pictureBoxBackground->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Presentation::pictureBoxBackground_MouseDown);
 			this->pictureBoxBackground->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Presentation::pictureBoxBackground_MouseMove);
 			this->pictureBoxBackground->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &Presentation::pictureBoxBackground_MouseUp);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(268, 104);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 13;
+			this->button1->Text = L"Ред.";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Presentation::button1_Click);
 			// 
 			// Presentation
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
+			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->ClientSize = System::Drawing::Size(1248, 694);
 			this->Controls->Add(this->panelSlide);
 			this->Controls->Add(this->buttonNext);
@@ -566,6 +581,8 @@ private: System::Void textBoxTitle_MouseUp(System::Object^ sender, System::Windo
 private: System::Void textBoxContent_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 private: System::Void textBoxContent_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 private: System::Void textBoxContent_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
-
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 };
+
+
 }

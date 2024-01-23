@@ -1,112 +1,14 @@
 #include "Presentation.h"
-#include <string>
+#include "SlideType.h"
+#include "SlideList.h"
+#include "Slide.h"
+
 using namespace kurs1401;
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Collections::Generic;
 using namespace System::IO;
-
-enum class SlideType {
-    TitleWithImage,
-    TitleWithText
-};
-
-ref class Slide {    
-public:
-    SlideType type;
-    String^ title;
-    String^ content;
-    String^ imagePath;
-    Slide();
-    Slide(SlideType type, String^ content, String^ title, String^ imagePath);
-    ~Slide();
-    SlideType GetSlideType()
-    {
-        return type;
-    }
-    void SetSlideType(SlideType type)
-    {
-        this->type = type;
-    }
-    String^ GetText()
-    {
-        return content;
-    }
-    void SetText(String^ text)
-    {
-        this->content = text;
-    }
-    String^ GetTitle()
-    {
-        return title;
-    }
-    void SetTitle(String^ title)
-    {
-        this->title = title;
-    }
-    String^ GetImage()
-    {
-        return imagePath;
-    }
-    void SetImage(Image^ image)
-    {
-        this->imagePath = imagePath;
-    }
-};
-
-ref class PresentationApp : public Form {
-private:
-    List <Slide^>^ slides;
-    int currentSlideIndex;
-public:
-    PresentationApp() {
-        slides = gcnew List<Slide^>();
-    }
-
-    void createSlide(SlideType type, String^ title, String^ content, String^ imagePath) {
-        Slide^ newSlide = gcnew Slide();
-        // Создаем новый GroupBox
-        GroupBox^ groupBox = gcnew GroupBox();
-
-        // Добавляем PictureBox
-        PictureBox^ pictureBox = gcnew PictureBox();
-        if (newSlide->type == SlideType::TitleWithImage)
-        {
-            pictureBox->Image = Image::FromFile(newSlide->imagePath);
-        }
-        groupBox->Controls->Add(pictureBox);
-
-        // Добавляем два TextBox
-        TextBox^ textBox1 = gcnew TextBox();
-        TextBox^ textBox2 = gcnew TextBox();
-        if (newSlide->type == SlideType::TitleWithText)
-        {
-            textBox1->Text = newSlide->content;
-        }
-        groupBox->Controls->Add(textBox1);
-        groupBox->Controls->Add(textBox2);
-        this->Controls->Add(groupBox);
-
-        newSlide->type = type;
-        newSlide->title = title;
-        if (type == SlideType::TitleWithImage) {
-            newSlide->imagePath = imagePath;
-        }
-        else if (type == SlideType::TitleWithText) {
-            newSlide->content = content;
-        }
-        slides->Add(newSlide);
-    }
-
-    void openSlide(int index)
-    {
-        // Получаем слайд с указанным индексом из списка
-        Slide^ slideToOpen = slides[index];
-
-        
-    }
-
-};
+using namespace System::Xml::Serialization;
 
 [STAThreadAttribute]
 
@@ -120,24 +22,6 @@ int main(array<String^>^ args)
     return 0;
 }
 
-Slide::Slide()
-{
-    throw gcnew System::NotImplementedException();
-}
-
-Slide::Slide(SlideType type, String^ text, String^ title, String^ imagePath)
-{
-    throw gcnew System::NotImplementedException();
-    this->content = text;
-    this->type = type;
-    this->title = title;
-    this->imagePath = imagePath;
-}
-
-Slide::~Slide()
-{
-    throw gcnew System::NotImplementedException();
-}
 
 System::Void kurs1401::Presentation::Presentation_Load(System::Object^ sender, System::EventArgs^ e) {
         textBoxTitle->Text = "Заголовок слайда";
@@ -219,31 +103,27 @@ System::Void kurs1401::Presentation::comboBoxAlign_SelectedIndexChanged(System::
 System::Void kurs1401::Presentation::открытьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
     OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
-    openFileDialog->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+    openFileDialog->Filter = "XML Files (.xml)|.xml|All Files (.)|.";
     openFileDialog->FilterIndex = 1;
     openFileDialog->InitialDirectory = "C:\\";
-    openFileDialog->FileName = "example.txt";
 
-    if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-        // Получить выбранный путь к файлу и обработать его
-        System::String^ filePath = openFileDialog->FileName;
-        // Добавить код для сохранения файла по выбранному пути
-    }
+    SlideList^ slideList = gcnew SlideList();
+    slideList->slides = gcnew List<Slide^>();
+    slideList->Open(openFileDialog->FileName);
 }
 
 System::Void kurs1401::Presentation::сохранитьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
     SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
-    saveFileDialog->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+    saveFileDialog->Filter = "XML Files (.xml)|.xml|All Files (.)|.";
     saveFileDialog->FilterIndex = 1;
     saveFileDialog->InitialDirectory = "C:\\";
-    saveFileDialog->FileName = "example.txt";
+    saveFileDialog->FileName = "example.xml";
 
-    if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-        // Получить выбранный путь к файлу и обработать его
-        System::String^ filePath = saveFileDialog->FileName;
-        // Добавить код для сохранения файла по выбранному пути
-    }
+    SlideList^ slideList = gcnew SlideList();
+    slideList->slides = gcnew List<Slide^>();
+    slideList->Save(saveFileDialog->FileName);
+    
 }
 
 System::Void kurs1401::Presentation::buttonTextColor_Click(System::Object^ sender, System::EventArgs^ e)
@@ -264,15 +144,29 @@ System::Void kurs1401::Presentation::пустойToolStripMenuItem_Click(System::Objec
 
 System::Void kurs1401::Presentation::заголовокТекстToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    Slide^ newSlide = gcnew Slide();
-    PresentationApp^ myObject = gcnew PresentationApp();
-    myObject->createSlide(newSlide->GetSlideType(), newSlide->title, newSlide->content, newSlide->imagePath);
+    Slide^ slide = gcnew Slide();
+    slide->type = SlideType::TitleWithText;
+    slide->title = textBoxTitle->Text;
+    slide->content = textBoxContent->Text;
+    slide->imagePath = pictureBoxBackground->ImageLocation;
+    String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
+    int selectedValueInt = Convert::ToInt32(selectedValueString);
+    slide->indexSlide = selectedValueInt;
 
+    SlideList^ slideList = gcnew SlideList();
+    slideList->slides = gcnew List<Slide^>();
+    slideList->slides->Add(slide);
+
+    slideList->Save("slides.xml");
+    
+    pictureBoxBackground->Visible = !pictureBoxBackground->Visible;
+    textBoxContent->Visible = textBoxContent->Visible;
 }
 
 System::Void kurs1401::Presentation::заголовокИзображениеToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    return System::Void();
+    textBoxContent->Visible = !textBoxContent->Visible;
+    pictureBoxBackground->Visible = pictureBoxBackground->Visible;
 }
 
 System::Void kurs1401::Presentation::удалитьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
@@ -309,9 +203,11 @@ System::Void kurs1401::Presentation::buttonMark_Click(System::Object^ sender, Sy
 
         // Добавление маркера "-" к выделенному тексту
         String^ markedText = "- " + selectedText;
+        String^ modifiedText = selectedText->Replace(Environment::NewLine, Environment::NewLine + "-");
+
 
         // Замена выделенного текста на текст с добавленным маркером
-        activeTextBox->SelectedText = markedText;
+        activeTextBox->SelectedText = modifiedText;
     }
 }
 
@@ -319,24 +215,28 @@ System::Void kurs1401::Presentation::buttonPrevious_Click(System::Object^ sender
 {
     String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
     int selectedValueInt = Convert::ToInt32(selectedValueString);
-    PresentationApp^ myObject = gcnew PresentationApp();
-    myObject->openSlide(selectedValueInt-1);
+    Presentation^ myObject = gcnew Presentation();
+    //myObject->openSlide(selectedValueInt-1);
 }
 
 System::Void kurs1401::Presentation::buttonNext_Click(System::Object^ sender, System::EventArgs^ e)
 {
     String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
     int selectedValueInt = Convert::ToInt32(selectedValueString);
-    PresentationApp^ myObject = gcnew PresentationApp();
-    myObject->openSlide(selectedValueInt+1);
+    Presentation^ myObject = gcnew Presentation();
+   // myObject->openSlide(selectedValueInt+1);
 }
 
 System::Void kurs1401::Presentation::listBoxSlides_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
+    SlideList^ slideList = gcnew SlideList();
+    int listSize = slideList->slides->Count; // Предполагая, что ваш List называется "yourList"
+    int itemHeight = listBoxSlides->Height / listSize; // Предполагая, что ваш ListBox называется "listBox1"
+    listBoxSlides->ItemHeight = itemHeight;
     String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
     int selectedValueInt = Convert::ToInt32(selectedValueString);
-    PresentationApp^ myObject = gcnew PresentationApp();
-    myObject->openSlide(selectedValueInt);
+    Presentation^ myObject = gcnew Presentation();
+   // myObject->openSlide(selectedValueInt);
 }
 
 System::Void kurs1401::Presentation::pictureBoxBackground_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
@@ -418,8 +318,15 @@ System::Void kurs1401::Presentation::textBoxContent_MouseMove(System::Object^ se
 System::Void kurs1401::Presentation::textBoxContent_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 {
     if (e->Button == System::Windows::Forms::MouseButtons::Left) {
-        // Сбрасываем начальную позицию
         startLocation = Point::Empty;
     }
+}
+
+System::Void kurs1401::Presentation::button1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    FontDialog^ fontDialog = gcnew FontDialog();
+            if (fontDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+                activeTextBox->Font = fontDialog->Font;
+            }
 }
 
