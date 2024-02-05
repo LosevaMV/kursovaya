@@ -44,7 +44,7 @@ namespace kurs1401 {
 	private: System::Windows::Forms::ToolStripMenuItem^ äîáàâèòüToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ øàáëîíToolStripMenuItem;
 
-	private: System::Windows::Forms::ToolStripMenuItem^ óäàëèòüToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ î÷èñòèòüToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ çàãğóçèòüÔîíToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ ñëàéäøîóToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ çàãîëîâîêÒåêñòToolStripMenuItem;
@@ -136,7 +136,7 @@ namespace kurs1401 {
 			this->çàãîëîâîêÒåêñòToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->çàãîëîâîêÈçîáğàæåíèåToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ïóñòîéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->óäàëèòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->î÷èñòèòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->çàãğóçèòüÔîíToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ñëàéäøîóToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
@@ -211,7 +211,7 @@ namespace kurs1401 {
 			// 
 			this->ñëàéäToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->äîáàâèòüToolStripMenuItem,
-					this->óäàëèòüToolStripMenuItem, this->çàãğóçèòüÔîíToolStripMenuItem
+					this->î÷èñòèòüToolStripMenuItem, this->çàãğóçèòüÔîíToolStripMenuItem
 			});
 			this->ñëàéäToolStripMenuItem->Name = L"ñëàéäToolStripMenuItem";
 			this->ñëàéäToolStripMenuItem->Size = System::Drawing::Size(77, 29);
@@ -258,12 +258,12 @@ namespace kurs1401 {
 			this->ïóñòîéToolStripMenuItem->Text = L"Ïóñòîé ñëàéä";
 			this->ïóñòîéToolStripMenuItem->Click += gcnew System::EventHandler(this, &Presentation::ïóñòîéToolStripMenuItem_Click);
 			// 
-			// óäàëèòüToolStripMenuItem
+			// î÷èñòèòüToolStripMenuItem
 			// 
-			this->óäàëèòüToolStripMenuItem->Name = L"óäàëèòüToolStripMenuItem";
-			this->óäàëèòüToolStripMenuItem->Size = System::Drawing::Size(232, 34);
-			this->óäàëèòüToolStripMenuItem->Text = L"Óäàëèòü";
-			this->óäàëèòüToolStripMenuItem->Click += gcnew System::EventHandler(this, &Presentation::óäàëèòüToolStripMenuItem_Click);
+			this->î÷èñòèòüToolStripMenuItem->Name = L"î÷èñòèòüToolStripMenuItem";
+			this->î÷èñòèòüToolStripMenuItem->Size = System::Drawing::Size(232, 34);
+			this->î÷èñòèòüToolStripMenuItem->Text = L"Î÷èñòèòü";
+			this->î÷èñòèòüToolStripMenuItem->Click += gcnew System::EventHandler(this, &Presentation::î÷èñòèòüToolStripMenuItem_Click);
 			// 
 			// çàãğóçèòüÔîíToolStripMenuItem
 			// 
@@ -565,7 +565,7 @@ private: System::Void buttonTextColor_Click(System::Object^ sender, System::Even
 private: System::Void ïóñòîéToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void çàãîëîâîêÒåêñòToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void çàãîëîâîêÈçîáğàæåíèåToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void óäàëèòüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void î÷èñòèòüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void çàãğóçèòüÔîíToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ñëàéäøîóToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void buttonMark_Click(System::Object^ sender, System::EventArgs^ e);

@@ -148,6 +148,31 @@ System::Void kurs1401::Presentation::çàãîëîâîêÒåêñòToolStripMenuItem_Click(Syste
     slide->type = SlideType::TitleWithText;
     slide->title = textBoxTitle->Text;
     slide->content = textBoxContent->Text;
+    //slide->imagePath = pictureBoxBackground->ImageLocation;
+    String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
+    int selectedValueInt = Convert::ToInt32(selectedValueString);
+    slide->indexSlide = selectedValueInt;
+
+    SlideList^ slideList = gcnew SlideList();
+    slideList->slides = gcnew List<Slide^>();
+    slideList->slides->Add(slide);
+
+    slideList->Save("slides.xml");
+
+    textBoxTitle->Clear();
+    textBoxContent->Clear();
+    pictureBoxBackground->Image = nullptr;
+
+    pictureBoxBackground->Visible = !pictureBoxBackground->Visible;
+    textBoxContent->Visible = textBoxContent->Visible;
+}
+
+System::Void kurs1401::Presentation::çàãîëîâîêÈçîáðàæåíèåToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    Slide^ slide = gcnew Slide();
+    slide->type = SlideType::TitleWithText;
+    slide->title = textBoxTitle->Text;
+    //slide->content = textBoxContent->Text;
     slide->imagePath = pictureBoxBackground->ImageLocation;
     String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
     int selectedValueInt = Convert::ToInt32(selectedValueString);
@@ -158,18 +183,16 @@ System::Void kurs1401::Presentation::çàãîëîâîêÒåêñòToolStripMenuItem_Click(Syste
     slideList->slides->Add(slide);
 
     slideList->Save("slides.xml");
-    
-    pictureBoxBackground->Visible = !pictureBoxBackground->Visible;
-    textBoxContent->Visible = textBoxContent->Visible;
-}
 
-System::Void kurs1401::Presentation::çàãîëîâîêÈçîáðàæåíèåToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-{
+    textBoxTitle->Clear();
+    textBoxContent->Clear();
+    pictureBoxBackground->Image = nullptr;
+
     textBoxContent->Visible = !textBoxContent->Visible;
     pictureBoxBackground->Visible = pictureBoxBackground->Visible;
 }
 
-System::Void kurs1401::Presentation::óäàëèòüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void kurs1401::Presentation::î÷èñòèòüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
     textBoxTitle->Clear();
     textBoxContent->Clear();
@@ -215,28 +238,73 @@ System::Void kurs1401::Presentation::buttonPrevious_Click(System::Object^ sender
 {
     String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
     int selectedValueInt = Convert::ToInt32(selectedValueString);
-    Presentation^ myObject = gcnew Presentation();
-    //myObject->openSlide(selectedValueInt-1);
+    SlideList^ slideList = gcnew SlideList();
+    int listSize = slideList->slides->Count;
+    int selectedIndex = listBoxSlides->SelectedIndex;
+
+    if (selectedIndex >= 0 && selectedIndex < listSize)
+    {
+        Slide^ selectedElement = slideList->slides[selectedIndex];
+
+        textBoxTitle->Text = selectedElement->title;
+        textBoxContent->Text = selectedElement->content;
+        pictureBoxBackground->ImageLocation = selectedElement->imagePath;
+
+        String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
+        int selectedValueInt = Convert::ToInt32(selectedValueString);
+        selectedElement->indexSlide = selectedValueInt;
+    }
+
+    int itemHeight = listBoxSlides->Height / listSize;
+    listBoxSlides->ItemHeight = itemHeight;
 }
 
 System::Void kurs1401::Presentation::buttonNext_Click(System::Object^ sender, System::EventArgs^ e)
 {
     String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
     int selectedValueInt = Convert::ToInt32(selectedValueString);
-    Presentation^ myObject = gcnew Presentation();
-   // myObject->openSlide(selectedValueInt+1);
+    SlideList^ slideList = gcnew SlideList();
+    int listSize = slideList->slides->Count;
+    int selectedIndex = listBoxSlides->SelectedIndex;
+
+    if (selectedIndex >= 0 && selectedIndex < listSize)
+    {
+        Slide^ selectedElement = slideList->slides[selectedIndex];
+
+        textBoxTitle->Text = selectedElement->title;
+        textBoxContent->Text = selectedElement->content;
+        pictureBoxBackground->ImageLocation = selectedElement->imagePath;
+
+        String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
+        int selectedValueInt = Convert::ToInt32(selectedValueString);
+        selectedElement->indexSlide = selectedValueInt;
+    }
+
+    int itemHeight = listBoxSlides->Height / listSize;
+    listBoxSlides->ItemHeight = itemHeight;
 }
 
 System::Void kurs1401::Presentation::listBoxSlides_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
     SlideList^ slideList = gcnew SlideList();
-    int listSize = slideList->slides->Count; // Ïðåäïîëàãàÿ, ÷òî âàø List íàçûâàåòñÿ "yourList"
-    int itemHeight = listBoxSlides->Height / listSize; // Ïðåäïîëàãàÿ, ÷òî âàø ListBox íàçûâàåòñÿ "listBox1"
+    int listSize = slideList->slides->Count;
+    int selectedIndex = listBoxSlides->SelectedIndex;
+
+    if (selectedIndex >= 0 && selectedIndex < listSize)
+    {
+        Slide^ selectedElement = slideList->slides[selectedIndex];
+
+        textBoxTitle->Text = selectedElement->title;
+        textBoxContent->Text = selectedElement->content;
+        pictureBoxBackground->ImageLocation = selectedElement->imagePath;
+
+        String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
+        int selectedValueInt = Convert::ToInt32(selectedValueString);
+        selectedElement->indexSlide = selectedValueInt;
+    }
+
+    int itemHeight = listBoxSlides->Height / listSize;
     listBoxSlides->ItemHeight = itemHeight;
-    String^ selectedValueString = listBoxSlides->SelectedItem->ToString();
-    int selectedValueInt = Convert::ToInt32(selectedValueString);
-    Presentation^ myObject = gcnew Presentation();
-   // myObject->openSlide(selectedValueInt);
 }
 
 System::Void kurs1401::Presentation::pictureBoxBackground_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)

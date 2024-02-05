@@ -12,7 +12,6 @@ public ref class SlideList
 public:
 	List<Slide^>^ slides;
 
-	// Сериализация списка слайдов в XML файл
 	void Save(String^ fileName)
 	{
 		SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
@@ -22,7 +21,6 @@ public:
 		saveFileDialog->FileName = "example.xml";
 
 		if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-			// Получить выбранный путь к файлу и обработать его
 			System::String^ filePath = saveFileDialog->FileName;
 			XmlSerializer^ serializer = gcnew XmlSerializer(SlideList::typeid);
 			TextWriter^ writer = gcnew StreamWriter(filePath);
@@ -39,7 +37,6 @@ public:
 		openFileDialog->FileName = "example.xml";
 		
 		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-			// Получить выбранный путь к файлу и обработать его
 			System::String^ filePath = openFileDialog->FileName;
 			XmlSerializer^ serializer = gcnew XmlSerializer(SlideList::typeid);
 			TextReader^ reader = gcnew StreamReader(filePath);
