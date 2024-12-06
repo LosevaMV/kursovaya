@@ -7,8 +7,6 @@ using namespace System::IO;
 using namespace System::Drawing;
 using namespace System::Xml::Serialization;
 
-
-
 ref class Slide {
 public:
     SlideType type;
@@ -55,7 +53,11 @@ public:
 
 Slide::Slide()
 {
-    throw gcnew System::NotImplementedException();
+    type = SlideType::TitleWithText;
+    title = "";
+    content = "";
+    imagePath = "";
+    indexSlide = -1;
 }
 
 Slide::Slide(SlideType type, String^ text, String^ title, String^ imagePath)

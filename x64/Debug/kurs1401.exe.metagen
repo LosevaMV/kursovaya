@@ -24,3 +24,7 @@ Class SlideList: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   Methods:
     Save(String): PrivateScope, Public, HideBySig
     Open(String): PrivateScope, Public, HideBySig
+Class Globals: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    SlideList slideList : Public, Static

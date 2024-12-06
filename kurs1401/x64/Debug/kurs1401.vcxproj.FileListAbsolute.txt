@@ -6,3 +6,6 @@ C:\Users\Маргарита\source\repos\LosevaMV\kursovaya\kurs1401\x64\Debug\k
 C:\Users\Маргарита\source\repos\LosevaMV\kursovaya\kurs1401\x64\Debug\kurs1401.vcxproj.SuggestedBindingRedirects.cache
 C:\Users\Маргарита\source\repos\LosevaMV\kursovaya\kurs1401\x64\Debug\kurs1401.Presentation.resources
 C:\Users\Маргарита\source\repos\LosevaMV\kursovaya\kurs1401\x64\Debug\kurs1401.vcxproj.GenerateResource.cache
+C:\Users\Admin\source\repos\kursovaya\kurs1401\x64\Debug\kurs1401.vcxproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\kursovaya\kurs1401\x64\Debug\kurs1401.Presentation.resources
+C:\Users\Admin\source\repos\kursovaya\kurs1401\x64\Debug\kurs1401.vcxproj.GenerateResource.cache

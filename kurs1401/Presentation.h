@@ -1,7 +1,4 @@
-#include "Slide.h";
-#include "SlideType.h";
 #pragma once
-
 namespace kurs1401 {
 
 	using namespace System;
@@ -582,6 +579,11 @@ private: System::Void textBoxContent_MouseDown(System::Object^ sender, System::W
 private: System::Void textBoxContent_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 private: System::Void textBoxContent_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ExitSlideshowMode(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+private: System::Void SavePresentation(String^ fileName);
+private: System::String^ ExtractTagContent(System::String^ input, System::String^ tag);
+private: System::Void LoadPresentation(String^ fileName);
+
 };
 
 

@@ -124,6 +124,7 @@
     <ClCompile Include="Presentation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Presentation.h">
       <FileType>CppForm</FileType>
     </ClInclude>
